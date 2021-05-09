@@ -4,7 +4,8 @@ import './index.css';
 import App from './layout/App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { Provider } from 'react-redux';
+import store from './redux/store/store.js';
 
 
 import {
@@ -19,7 +20,9 @@ ReactDOM.render(
     <Router>
       <Switch>
         <Route>
+        <Provider store={store}>
           <App/>
+        </Provider>
         </Route>
       </Switch>
     </Router>

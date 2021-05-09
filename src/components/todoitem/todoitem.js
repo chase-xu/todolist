@@ -5,7 +5,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 
 
 
-export default function Todoitem(props){
+export default function todoitem(props){
     
 
     return(
