@@ -1,29 +1,35 @@
-import todoitem from '../todoitem/todoitem.js';
+import Todoitem from '../todoitem/todoitem.js';
 import {useState, useEffect} from 'react';
 import Card from 'react-bootstrap/Card';
 import Axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+
 
 export default function List(props){
 
     const [list, setList] = useState([]);
+    const dispatch = useDispatch()
 
-    // const getData=()=>{
-    //     Axios.post('http://localhost:8082/api/items').then(response=>{
-    //         const data = response.data;
-    //         console.log(data);
-    //         setList(data);
-    //     });
-    // }
+    const todosRemaining = useSelector(state => {
+        const uncompletedTodos = state.todos.filter(todo => !todo.completed)
+        return uncompletedTodos
+    })
 
-//     useEffect(() => {
-//         getData();
-//    }, [])
+    const todosFinished = useSelector(state=>{
+        const completedTodos = state.todos.filter(todo=> todo.completed);
+        return completedTodos;
+    })
+  
+
+    useEffect(() => {
+       console.log(todosRemaining);
+   }, [])
 
     return(
         <div>
             <Card >
-                {list.map(item=>{
-                    return (<todoitem item={item} />);
+                {todosRemaining.map(item=>{
+                    return (<Todoitem item={item} />);
                 })}
             </Card>
         </div>
