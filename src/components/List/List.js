@@ -29,7 +29,7 @@ export default function List(props){
         <div>
             <Card >
                 {todosRemaining.map(item=>{
-                    return (<Todoitem item={item} />);
+                    return (<Todoitem key={item.id} item={item} />);
                 })}
             </Card>
         </div>

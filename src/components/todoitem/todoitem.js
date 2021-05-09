@@ -10,7 +10,7 @@ export default function todoitem(props){
 
     return(
         <div>
-            <ListGroup.Item key={props.item.id} >{props.item.text}</ListGroup.Item>
+            <ListGroup.Item  >{props.item.text}</ListGroup.Item>
         </div>
     );
 }
