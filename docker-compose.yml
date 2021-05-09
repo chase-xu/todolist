@@ -1,0 +1,21 @@
+version: '3'
+services:
+  nodejs-server:
+    build:
+      context: ./src/api
+    ports:
+      - "3080:3080"
+    container_name: node-api
+    volumes:
+       - ./api:/usr/src/api
+       - /usr/src/app/api/node_modules
+  react-ui:
+    build:
+      context: ./
+    ports:
+      - "3000:3000"
+    container_name: react-ui
+    stdin_open: true
+    volumes:
+       - ./my-app:/usr/src/todolist
+       - /usr/src/app/m-app/node_moduls

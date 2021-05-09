@@ -1,8 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './layout/App';
 import reportWebVitals from './reportWebVitals';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -15,7 +19,7 @@ ReactDOM.render(
     <Router>
       <Switch>
         <Route>
-          <App />
+          <App/>
         </Route>
       </Switch>
     </Router>
