@@ -1,12 +1,12 @@
 import Appbar from '../components/Appbar/Appbar.js';
-import List from '../components/List/Borad.js';
+import Board from '../components/List/Board.js';
 
 
 function App() {
   return (
     <div>
       <Appbar/>
-        <List/>
+      <Board/>
     </div>
 
   );

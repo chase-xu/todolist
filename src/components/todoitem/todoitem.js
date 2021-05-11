@@ -11,7 +11,6 @@ export default function todoitem(props){
     const dragStart =e=>{
         const target = e.target;
         e.dataTransfer.setData('card_id', target.id);
-
         setTimeout(()=>{
             target.style.display = "none";
         }, 0);
@@ -26,7 +25,8 @@ export default function todoitem(props){
         id = {props.id}
         draggable='true'
         onDragStart={dragStart}
-        onDragOver={dragOver}>
+        onDragOver={dragOver}
+        onDrop={props.drop}>
             <Card>{props.item.text}</Card>
         </div>
     );

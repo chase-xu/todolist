@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-export default function Borad(props){
+export default function Board(props){
 
     const [list, setList] = useState([]);
     const dispatch = useDispatch()
@@ -38,26 +38,49 @@ export default function Borad(props){
        const card_id = e.dataTransfer.getData('card_id');
        const card = document.getElementById(card_id);
        card.style.display = 'block';
-
+       const list = e.target.getAttribute('category');
+       console.log(e.target.getAttribute('category'));
+       dispatch({type: list, id: card_id});
+     
+       
 
    }
+
+   const style ={
+       div: {
+            backgroundColor: 'blue',
+            margin: '5px',
+            height: '100%',
+        },
+        list: {
+            height: '80%',
+            margin: '10px'
+        }
+   }
+
     return(
         <div>
-            <Container>
-                <Row>
-                    <Col className='todos' >
-                        {todosRemaining.map(item=>{
-                            return (<Todoitem id={item.id} key={item.id} item={item} onDragOver={dragOver} onDrop={drop} />);
-                        })}
+            <Container style={style.div} >
+                <Row >
+                    <Col category='todos' onDragOver={dragOver} onDrop={drop} >
+                        <div>
+
+                        </div>
+                        <div>
+                            {todosRemaining.map(item=>{
+                                return (<Todoitem id={item.id} key={item.id} item={item}  />);
+                            })}
+                        </div>
+
                     </Col>
-                    <Col className='progressing'>
+                    <Col category='progressing' onDragOver={dragOver} onDrop={drop}>
                         {todosInProgress.map(item=>{
-                            return (<Todoitem id={item.id} key={item.id} item={item} onDragOver={dragOver} onDrop={drop} />);
+                            return (<Todoitem id={item.id} key={item.id} item={item}  list='progressing'/>);
                         })}
                     </Col>
-                    <Col className='done'>
+                    <Col category='done' onDragOver={dragOver} onDrop={drop}>
                         {todosFinished.map(item=>{
-                            return (<Todoitem id={item.id} key={item.id} item={item} onDragOver={dragOver} onDrop={drop} />);
+                            return (<Todoitem id={item.id} key={item.id} item={item} list='done' />);
                         })}
                     </Col>
                 </Row>

@@ -2,7 +2,8 @@ const initialState = {
     todos: [
       { id: 0, text: 'Learn React', completed: true, state: 'completed' },
       { id: 1, text: 'Learn Redux', completed: false, color: 'purple' , state: 'incompleted'},
-      { id: 2, text: 'Build Own Project!', completed: false, color: 'blue' , state: 'progressing'}
+      { id: 2, text: 'Build Own Project!', completed: false, color: 'blue' , state: 'progressing'},
+      { id: 3, text: 'Build Own Project!', completed: false, color: 'blue' , state: 'incompleted'}
     ],
     filters: {
       status: 'All',
@@ -34,6 +35,43 @@ const initialState = {
           ]
         }
       }
+      case 'todos':{
+        const index = state.todos.findIndex((obj=>obj.id === Number(action.id)));
+        let newTodos = [...state.todos];
+        newTodos[index] = {...newTodos[index], state: 'incompleted'}
+        return {
+          ...state,
+          todos: [
+            ...newTodos
+          ]
+        }
+      }
+
+      case 'progressing':{
+        const index = state.todos.findIndex((obj=>obj.id === Number(action.id)));
+        let newTodos = [...state.todos];
+        newTodos[index] = {...newTodos[index], state: 'progressing'}
+        return {
+          ...state,
+          todos: [
+            ...newTodos
+          ]
+        }
+      }
+
+      case 'done':{
+        const index = state.todos.findIndex((obj=>obj.id === Number(action.id)));
+        let newTodos = [...state.todos];
+        newTodos[index] = {...newTodos[index], state: 'completed'}
+        return {
+          ...state,
+          todos: [
+            ...newTodos
+          ]
+        }
+      }
+
+
       default:
         // If this reducer doesn't recognize the action type, or doesn't
         // care about this specific action, return the existing state unchanged
