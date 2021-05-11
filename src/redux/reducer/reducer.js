@@ -1,8 +1,8 @@
 const initialState = {
     todos: [
-      { id: 0, text: 'Learn React', completed: true },
-      { id: 1, text: 'Learn Redux', completed: false, color: 'purple' },
-      { id: 2, text: 'Build Own Project!', completed: false, color: 'blue' }
+      { id: 0, text: 'Learn React', completed: true, state: 'completed' },
+      { id: 1, text: 'Learn Redux', completed: false, color: 'purple' , state: 'incompleted'},
+      { id: 2, text: 'Build Own Project!', completed: false, color: 'blue' , state: 'progressing'}
     ],
     filters: {
       status: 'All',
