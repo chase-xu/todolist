@@ -66,15 +66,19 @@ export default function Board(props){
         <div style={style.div}>
             <Container  >
                 <Row style={style.list}>
-                    <Col category='todos' onDragOver={dragOver} onDrop={drop} >
-                        <Card>
-                            <Card.Header>Todos</Card.Header>
-                            <ListGroup variant="flush">
-                                {todosRemaining.map(item=>{
-                                        return (<Todoitem id={item.id} key={item.id} item={item}  />);
-                                    })}
-                            </ListGroup>
-                        </Card>
+                    <Col category='todos' onDragOver={dragOver} onDrop={drop} style={{
+                        backgroundColor: 'yellow',
+                    }}>
+                        <Container category='todos' onDragOver={dragOver} onDrop={drop}>
+                            <Card >
+                                <Card.Header>Todos</Card.Header>
+                                <ListGroup variant="flush" category='todos' onDragOver={dragOver} onDrop={drop}>
+                                    {todosRemaining.map(item=>{
+                                            return (<Todoitem id={item.id} key={item.id} item={item} dragOver={dragOver} drop={drop}/>);
+                                        })}
+                                </ListGroup>
+                            </Card>
+                        </Container>
                     </Col>
                     <Col category='progressing' onDragOver={dragOver} onDrop={drop}>
                         <Card>

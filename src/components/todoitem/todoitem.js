@@ -18,15 +18,15 @@ export default function todoitem(props){
 
     const dragOver=e=>{
         e.stopPropagation();
-        
     }
     return(
         <div
         id = {props.id}
         draggable='true'
         onDragStart={dragStart}
-        onDragOver={dragOver}
-        onDrop={props.drop}>
+        onDragOver={props.dragOver}
+        onDrop={props.drop}
+        on>
             <ListGroup.Item>{props.item.text}</ListGroup.Item>
         </div>
     );
