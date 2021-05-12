@@ -1,10 +1,12 @@
 import Todoitem from '../todoitem/todoitem.js';
 import {useState, useEffect} from 'react';
-import Axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
+
 
 export default function Board(props){
 
@@ -41,9 +43,6 @@ export default function Board(props){
        const list = e.target.getAttribute('category');
        console.log(e.target.getAttribute('category'));
        dispatch({type: list, id: card_id});
-     
-       
-
    }
 
    const style ={
@@ -51,37 +50,51 @@ export default function Board(props){
             backgroundColor: 'blue',
             margin: '5px',
             height: '100%',
+            width: '80%',
         },
         list: {
             height: '80%',
-            margin: '10px'
+            margin: '10px',
+            padding: '10px',
+            '& Col': {
+                margin: '50px',
+            }
         }
    }
 
     return(
-        <div>
-            <Container style={style.div} >
-                <Row >
+        <div style={style.div}>
+            <Container  >
+                <Row style={style.list}>
                     <Col category='todos' onDragOver={dragOver} onDrop={drop} >
-                        <div>
-
-                        </div>
-                        <div>
-                            {todosRemaining.map(item=>{
-                                return (<Todoitem id={item.id} key={item.id} item={item}  />);
-                            })}
-                        </div>
-
+                        <Card>
+                            <Card.Header>Todos</Card.Header>
+                            <ListGroup variant="flush">
+                                {todosRemaining.map(item=>{
+                                        return (<Todoitem id={item.id} key={item.id} item={item}  />);
+                                    })}
+                            </ListGroup>
+                        </Card>
                     </Col>
                     <Col category='progressing' onDragOver={dragOver} onDrop={drop}>
-                        {todosInProgress.map(item=>{
-                            return (<Todoitem id={item.id} key={item.id} item={item}  list='progressing'/>);
-                        })}
+                        <Card>
+                            <Card.Header>Progressing</Card.Header>
+                            <ListGroup variant="flush">
+                                {todosInProgress.map(item=>{
+                                    return (<Todoitem id={item.id} key={item.id} item={item}  list='progressing'/>);
+                                })}
+                            </ListGroup>
+                        </Card>
                     </Col>
                     <Col category='done' onDragOver={dragOver} onDrop={drop}>
-                        {todosFinished.map(item=>{
-                            return (<Todoitem id={item.id} key={item.id} item={item} list='done' />);
-                        })}
+                        <Card>
+                                <Card.Header>Done</Card.Header>
+                                <ListGroup variant="flush">
+                                    {todosFinished.map(item=>{
+                                        return (<Todoitem id={item.id} key={item.id} item={item} list='done' />);
+                                    })}
+                                </ListGroup>
+                        </Card>
                     </Col>
                 </Row>
             </Container>

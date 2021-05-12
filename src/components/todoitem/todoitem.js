@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {useEffect, useStyle, useSelector} from 'react';
-import ListGroup from 'react-bootstrap/ListGroup';
 import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 
 
@@ -27,7 +27,7 @@ export default function todoitem(props){
         onDragStart={dragStart}
         onDragOver={dragOver}
         onDrop={props.drop}>
-            <Card>{props.item.text}</Card>
+            <ListGroup.Item>{props.item.text}</ListGroup.Item>
         </div>
     );
 }
