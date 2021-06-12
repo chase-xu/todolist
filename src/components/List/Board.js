@@ -10,7 +10,6 @@ import ListGroup from 'react-bootstrap/ListGroup';
 
 export default function Board(props){
 
-    const [list, setList] = useState([]);
     const dispatch = useDispatch()
 
     const todosRemaining = useSelector(state => {
@@ -74,7 +73,7 @@ export default function Board(props){
                                 <Card.Header>Todos</Card.Header>
                                 <ListGroup variant="flush" category='todos' onDragOver={dragOver} onDrop={drop}>
                                     {todosRemaining.map(item=>{
-                                            return (<Todoitem id={item.id} key={item.id} item={item} dragOver={dragOver} drop={drop}/>);
+                                            return (<Todoitem category='todos' id={item.id} key={item.id} item={item} dragOver={dragOver} drop={drop}/>);
                                         })}
                                 </ListGroup>
                             </Card>
@@ -85,7 +84,7 @@ export default function Board(props){
                             <Card.Header>Progressing</Card.Header>
                             <ListGroup variant="flush">
                                 {todosInProgress.map(item=>{
-                                    return (<Todoitem id={item.id} key={item.id} item={item}  list='progressing'/>);
+                                    return (<Todoitem category='progressing' id={item.id} key={item.id} item={item}  list='progressing'/>);
                                 })}
                             </ListGroup>
                         </Card>
@@ -95,7 +94,7 @@ export default function Board(props){
                                 <Card.Header>Done</Card.Header>
                                 <ListGroup variant="flush">
                                     {todosFinished.map(item=>{
-                                        return (<Todoitem id={item.id} key={item.id} item={item} list='done' />);
+                                        return (<Todoitem category='done' id={item.id} key={item.id} item={item} list='done' />);
                                     })}
                                 </ListGroup>
                         </Card>
