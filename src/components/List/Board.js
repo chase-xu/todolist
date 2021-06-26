@@ -7,7 +7,11 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 
-
+/**
+ * Each board as an item list
+ * @param {*} props 
+ * @returns 
+ */
 export default function Board(props){
 
     const dispatch = useDispatch()
@@ -44,6 +48,9 @@ export default function Board(props){
        dispatch({type: list, id: card_id});
    }
 
+   /**
+    * CSS styles for components of the boards
+    */
    const style ={
        div: {
             backgroundColor: 'blue',
@@ -57,7 +64,8 @@ export default function Board(props){
             padding: '10px',
             '& Col': {
                 margin: '50px',
-            }
+            },
+            minHeight: '300px',
         }
    }
 
