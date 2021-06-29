@@ -1,5 +1,5 @@
 import Todoitem from '../todoitem/todoitem.js';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -31,8 +31,34 @@ export default function Board(props){
         return progressing;
     })
 
+    const closeMenu = useSelector(state=>{
+        return state.closeMenu;
+    })
 
+    const todos = useSelector(state=>{
+        return state.todos;
+    })
+
+
+    // const [pos, setPos] = useState([]);
+    const menuOn = useSelector(state=>{
+        return state.menuOn;
+    })
     useEffect(() => {
+        if(menuOn){
+            document.addEventListener('click', e=>{
+                const xPos = e.pageX + 'px';
+                const yPos = e.pageY + 'px';
+                const leng = todos.length;
+                for( let i = 0; i < leng; i++){
+                    console.log(todos[i]);
+                    if(todos[i].showMenu === true){
+                        dispatch({type: 'toggleCloseMenu'});
+                    }
+                }
+            });
+        }
+
    }, [])
 
    const dragOver = e=>{

@@ -1,16 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {useEffect, useStyle, useState} from 'react';
+import {useEffect, useStyle, useState, useRef} from 'react';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { useSelector, useDispatch } from 'react-redux';
 import ContextMenu from './contextMenu/contextMenu.js';
+import $ from 'jquery';
 
 
 export default function Todoitem(props){
 
-    const [pos, setPos] = useState([]);
-    const [menuSwitch, setMenuSwitch] = useState(false);
+    const dispatch = useDispatch();
+    const pos = useSelector(state=>{
+        return state.pos;
+    });
+    const closeMenu = useSelector(state=>{
+        return state.closeMenu;
+    })
+    const [menu, setMenu] = useState(false);
 
     const dragStart =e=>{
         const target = e.target;
@@ -20,44 +27,51 @@ export default function Todoitem(props){
         }, 0);
     };
 
+    const menuRef =  useRef();
+    const contextMenu = <ContextMenu  pos={pos}  closeMenu={closeMenu}/>;
+
     useEffect(()=>{
-        //add event listener for right click on each item that gives the option to either delete or edit the item
-        // document.addEventListener("contextmenu", (event) => {
-        //     event.preventDefault();
-        //     const xPos = event.pageX + "px";
-        //     const yPos = event.pageY + "px";
-        //     setPos([xPos, yPos]);
-        //     setMenuSwitch(true);
-        //     console.log(pos);
-        //     console.log(menuSwitch);
-        //     //
-        //   });
-        // document.addEventListener('click', e=>{
-        //     e.preventDefault();
-        //     const 
-        // })
-    }, [])
+        //add event listener for clicking on each item that gives the option to either delete or edit the item
+        if(menu){
+            document.addEventListener('click', menuOff);
+        }
+    },[menu])
+
 
     const handleClick =(e)=>{
-        const target = e.target;
-        // const xPos = e.pageX + 'px';
-        // const yPos = e.pageY + 'px';
-        // console.log(xPos, yPos);
-        setMenuSwitch(!menuSwitch);
-        
+        console.log(props.id);
+        const xPos = e.pageX + 'px';
+        const yPos = e.pageY + 'px';
+        setMenu(!menu);
+        $('.header').slideDown(400);
+    }
+
+    /**
+     * if the any of the menus have be open, and the user has clicked somewhere outside of the menu, then close the menu.
+     */
+    const menuOff =(e)=>{
+        if(e === true || !menuRef.current.contains(e.target)){
+            setMenu(!menu);
+            //remove the event listener after the menu has been closed.
+            document.removeEventListener('click', menuOff);
+        }
+
     }
 
     return(
-        <div
-        id = {props.id}
-        draggable='true'
-        onDragStart={dragStart}
-        onDragOver={props.dragOver}
-        onDrop={props.drop}
-        >
-            <ListGroup.Item category = {props.category} onClick={handleClick}>{props.item.text}</ListGroup.Item>
-            {menuSwitch ? <ContextMenu style={{ top: pos[0], left: pos[1] }} pos={pos} /> : null}
-            
+        <div>
+            <div
+            id = {props.id}
+            draggable='true'
+            onDragStart={dragStart}
+            onDragOver={props.dragOver}
+            onDrop={props.drop}
+            onClick={handleClick}
+            category = {props.category}
+            >
+                <ListGroup.Item  >{props.item.text}</ListGroup.Item>            
+            </div>
+            <div ref={menuRef}>{menu ? contextMenu: null}</div> 
         </div>
     );
 }

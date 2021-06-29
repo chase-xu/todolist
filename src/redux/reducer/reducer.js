@@ -1,14 +1,16 @@
 const initialState = {
     todos: [
-      { id: 0, text: 'Learn React', completed: true, state: 'completed' },
-      { id: 1, text: 'Learn Redux', completed: false, color: 'purple' , state: 'incompleted'},
-      { id: 2, text: 'Build Own Project!', completed: false, color: 'blue' , state: 'progressing'},
-      { id: 3, text: 'Build Own Project!', completed: false, color: 'blue' , state: 'incompleted'}
+      { id: 0, text: 'Learn React', completed: true, state: 'completed', showMenu:false, },
+      { id: 1, text: 'Learn Redux', completed: false, color: 'purple' , state: 'incompleted', showMenu: false,},
+      { id: 2, text: 'Build Own Project!', completed: false, color: 'blue' , state: 'progressing', showMenu: false,},
+      { id: 3, text: 'Build Own Project!', completed: false, color: 'blue' , state: 'incompleted', showMenu: false,}
     ],
     filters: {
       status: 'All',
       colors: []
-    }
+    },
+    menuOn: false,
+    pos: [],
   }
   
   // Use the initialState as a default value
@@ -68,6 +70,42 @@ const initialState = {
           todos: [
             ...newTodos
           ]
+        }
+      }
+
+      case 'toggleCloseMenu':{
+        let newTodos = [...state.todos];
+        const leng = newTodos.length;
+        for(let i = 0; i < leng; i++){
+          if(newTodos[i].showMenu === true){
+            newTodos[i].showMenu = false;
+          }
+        }
+        let menu = false;
+        return{
+          ...state,
+          menuOn: menu,
+          todos:[...newTodos],
+        }
+
+      }
+
+      case 'toggleMenu':{
+        const index = state.todos.findIndex(obj=>obj.id === Number(action.id));
+        let newTodos = [...state.todos];
+        newTodos[index] = {...newTodos[index], showMenu: !newTodos[index].showMenu};
+        return{
+          ...state,
+          menuOn: !state.menuOn,
+          todos:[...newTodos],
+        }
+      }
+
+      case 'updatePos':{
+        let newPos = action.pos;
+        return{
+          ...state,
+          pos: newPos,
         }
       }
 
