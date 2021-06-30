@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { useSelector, useDispatch } from 'react-redux';
 import ContextMenu from './contextMenu/contextMenu.js';
-import $ from 'jquery';
+import {Button } from 'react-bootstrap';
 
 
 export default function Todoitem(props){
@@ -43,7 +43,6 @@ export default function Todoitem(props){
         const xPos = e.pageX + 'px';
         const yPos = e.pageY + 'px';
         setMenu(!menu);
-        $('.header').slideDown(400);
     }
 
     /**
@@ -57,7 +56,6 @@ export default function Todoitem(props){
         }
 
     }
-
     return(
         <div>
             <div
@@ -69,7 +67,7 @@ export default function Todoitem(props){
             onClick={handleClick}
             category = {props.category}
             >
-                <ListGroup.Item  >{props.item.text}</ListGroup.Item>            
+                <ListGroup.Item>{props.item.text}</ListGroup.Item>
             </div>
             <div ref={menuRef}>{menu ? contextMenu: null}</div> 
         </div>

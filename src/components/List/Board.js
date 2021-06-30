@@ -6,6 +6,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
+import Navbar from 'react-bootstrap/Navbar';
+import { NavbarBrand } from 'react-bootstrap';
+import './Board.css';
 
 /**
  * Each board as an item list
@@ -103,35 +106,33 @@ export default function Board(props){
                         backgroundColor: 'yellow',
                     }}>
                         <Container category='todos' onDragOver={dragOver} onDrop={drop}>
-                            <Card >
-                                <Card.Header>Todos</Card.Header>
+                                
+                                <Navbar id='nav' ><Navbar.Brand>Todos</Navbar.Brand></Navbar>
                                 <ListGroup variant="flush" category='todos' onDragOver={dragOver} onDrop={drop}>
                                     {todosRemaining.map(item=>{
                                             return (<Todoitem category='todos' id={item.id} key={item.id} item={item} dragOver={dragOver} drop={drop}/>);
                                         })}
                                 </ListGroup>
-                            </Card>
+                            
                         </Container>
                     </Col>
                     <Col category='progressing' onDragOver={dragOver} onDrop={drop}>
-                        <Card>
-                            <Card.Header>Progressing</Card.Header>
+                        <Navbar id='nav' ><Navbar.Brand>Progressing</Navbar.Brand></Navbar>
                             <ListGroup variant="flush">
                                 {todosInProgress.map(item=>{
                                     return (<Todoitem category='progressing' id={item.id} key={item.id} item={item}  list='progressing'/>);
                                 })}
                             </ListGroup>
-                        </Card>
+                       
                     </Col>
                     <Col category='done' onDragOver={dragOver} onDrop={drop}>
-                        <Card>
-                                <Card.Header>Done</Card.Header>
+                        <Navbar id='nav' ><Navbar.Brand>Done</Navbar.Brand></Navbar>
                                 <ListGroup variant="flush">
                                     {todosFinished.map(item=>{
                                         return (<Todoitem category='done' id={item.id} key={item.id} item={item} list='done' />);
                                     })}
                                 </ListGroup>
-                        </Card>
+                        
                     </Col>
                 </Row>
             </Container>
