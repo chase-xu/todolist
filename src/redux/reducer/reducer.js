@@ -109,6 +109,18 @@ const initialState = {
         }
       }
 
+      case 'removeItem': {
+        let newTodos = state.todos;
+        const id = Number(action.id);
+        const index = state.todos.findIndex(obj=>obj.id === id);
+        newTodos.splice(index, 1);
+        return{
+          ...state,
+          todos:[...newTodos],
+        }
+
+      }
+
 
       default:
         // If this reducer doesn't recognize the action type, or doesn't

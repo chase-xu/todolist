@@ -14,9 +14,7 @@ export default function Todoitem(props){
     const pos = useSelector(state=>{
         return state.pos;
     });
-    const closeMenu = useSelector(state=>{
-        return state.closeMenu;
-    })
+
     const [menu, setMenu] = useState(false);
 
     const dragStart =e=>{
@@ -27,8 +25,14 @@ export default function Todoitem(props){
         }, 0);
     };
 
+    const closeMenu =(e)=>{
+        setMenu(!menu);
+        document.removeEventListener('click', menuOff);
+    }
+
     const menuRef =  useRef();
-    const contextMenu = <ContextMenu  pos={pos}  closeMenu={closeMenu}/>;
+    const contextMenu = <ContextMenu id={props.id} pos={pos}  closeMenu={closeMenu} />;
+
 
     useEffect(()=>{
         //add event listener for clicking on each item that gives the option to either delete or edit the item
@@ -44,6 +48,7 @@ export default function Todoitem(props){
         const yPos = e.pageY + 'px';
         setMenu(!menu);
     }
+
 
     /**
      * if the any of the menus have be open, and the user has clicked somewhere outside of the menu, then close the menu.
