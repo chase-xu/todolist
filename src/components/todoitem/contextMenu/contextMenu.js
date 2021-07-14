@@ -5,7 +5,6 @@ import {Button } from 'react-bootstrap';
 import './contextMenu.css';
 
 export default function ContextMenu (props){
-    // const [pos, setPos] = useState([props.pos[0], props.pos[1]]);
     const dispatch = useDispatch();
 
     const handleEidt =(e)=>{
@@ -13,7 +12,6 @@ export default function ContextMenu (props){
 
     }
     const handleRemove=(e)=>{
-        // e.preventDefault();
         const id = props.id;
         props.closeMenu();
         dispatch({type: 'removeItem', id: id});
