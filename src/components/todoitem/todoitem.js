@@ -79,4 +79,6 @@ export default function Todoitem(props){
     );
 }
 
-
+/**should add condition check to see if any item is been editing, if yes implement the text field instead,
+ * remember to check if there is one item's being editing.
+ */

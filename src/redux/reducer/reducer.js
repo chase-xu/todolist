@@ -11,6 +11,7 @@ const initialState = {
     },
     menuOn: false,
     pos: [],
+    editing: null,
   }
   
   // Use the initialState as a default value
@@ -118,6 +119,17 @@ const initialState = {
           ...state,
           todos:[...newTodos],
         }
+
+      }
+
+      case 'editingItem':{
+        let newTodos = state.todos;
+        const id = Number(action.id);
+        let newEditing = id;
+        return{
+          ...state,
+          editing: newEditing,
+        }        
 
       }
 

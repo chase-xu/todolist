@@ -47,6 +47,14 @@ export default function Board(props){
     const menuOn = useSelector(state=>{
         return state.menuOn;
     })
+
+    const editing =(id)=>{
+        const todoitem = todos.filter(todos=> todos.id === Number(id));
+        /**should pass id to todoitem and then replace display to text field
+         * Use redux might be the quicker way
+         */
+    }
+
     useEffect(() => {
         if(menuOn){
             document.addEventListener('click', e=>{
