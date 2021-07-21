@@ -11,6 +11,16 @@ import {Button } from 'react-bootstrap';
 export default function Todoitem(props){
 
     const dispatch = useDispatch();
+    const editingId = useSelector(state=>{
+        return state.editing;
+    });
+
+    const itemId = props.id;
+
+    const itemContent = useSelector(state=>{
+       const index = state.todos.findIndex(obj=>obj.id === Number(itemId));
+       return state.todos[index].id; 
+    });
     const pos = useSelector(state=>{
         return state.pos;
     });
@@ -72,7 +82,7 @@ export default function Todoitem(props){
             onClick={handleClick}
             category = {props.category}
             >
-                <ListGroup.Item>{props.item.text}</ListGroup.Item>
+                <ListGroup.Item>{ itemId == editingId ? <input value={props.item.text}></input>  : props.item.text}</ListGroup.Item>
             </div>
             <div ref={menuRef}>{menu ? contextMenu: null}</div> 
         </div>
